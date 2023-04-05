@@ -1,18 +1,27 @@
 
 import React, { useState } from "react";
 import { StarIcon } from "@heroicons/react/solid";
+import { useDispatch } from "react-redux";
+import { addToBasket } from "../features/basketSlice";
+
 
 
 export default function Product(props) {
-  const { title, price, description, category, image } = props;
+  const { id,title, price, description, category, image } = props;
   const [rating] = useState(Math.floor(Math.random()*5)+1);
   const[isPrime]=useState(Math.random()<0.5);
-
+  const dispatch=useDispatch();
+  const addItemToBasket=()=>{
+    const product={
+      id,title, price, description, category, image 
+    }
+    dispatch(addToBasket(product));
+  }
   return (
     <div className="relative flex flex-col m-5 bg-white z-30 p-10">
       <p className="absolute top-2 right-2 xsm italic">{category}</p>
       <img  className='h-72 object-contain' src={image} alt="" />
-      <h4 className="my-3 ">{title}</h4>
+      <h4 className="my-3 font-bold">{title}</h4>
       <div className="flex">
         {Array(rating)
           .fill()
@@ -31,7 +40,7 @@ export default function Product(props) {
       </div>
       }
       <p className="text-xs my-2 line-clamp-2">{description}</p>
-      <button className="button mt-auto"> Add to Cart</button>
+      <button onClick={addItemToBasket} className="button mt-auto"> Add to Cart</button>
      
     </div>
   );
