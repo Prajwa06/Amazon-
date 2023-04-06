@@ -30,7 +30,7 @@ export default function Product(props) {
           })}
       </div>
       <div>
-      <p className="mb-5"><span>₹ </span><span>{Math.floor(price*80/2)}</span> </p>
+      <p className="mb-5"><span>₹ </span><span>{Math.floor(price*80)}</span> </p>
           
       </div>
       {isPrime && 

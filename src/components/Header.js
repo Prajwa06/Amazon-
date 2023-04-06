@@ -10,7 +10,6 @@ import { selectItems } from "../features/basketSlice";
 export default function Header() {
   const user = useSelector(selectUser);
   const items=useSelector(selectItems);
-  console.log(items);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleLogout = () => {
@@ -21,6 +20,10 @@ export default function Header() {
   const toHome = () => {
     navigate("/");
   };
+  const toOrders = () => {
+    navigate("/orders");
+  };
+
   return (
     <div>
       {/* Header top */}
@@ -50,7 +53,7 @@ export default function Header() {
             <p className="font-bold md:text-sm ">Account & List</p>
           </div>
 
-          <div className="link  md:inline">
+          <div onClick={toOrders} className="link  md:inline">
             <p className="font-bold">Returns</p>
             <p className="font-bold md:text-sm">& orders</p>
           </div>

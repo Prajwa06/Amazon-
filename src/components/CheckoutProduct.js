@@ -4,6 +4,7 @@ import { removeFromBasket } from '../features/basketSlice';
 
 export default function CheckoutProduct(props) {
     const dispatch=useDispatch();
+    // eslint-disable-next-line
     const{ id,title, price, description, category, image}=props;
     const removeItem =()=>{
         dispatch(removeFromBasket({id}));

@@ -9,10 +9,15 @@ import { auth } from "./firebase";
 import { Route, Routes } from "react-router-dom";
 import Checkout from "./components/Checkout";
 import Home from "./components/Home";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import Success from "./components/Success";
+import Orders from "./components/Orders";
+
+const stripePromise=loadStripe("pk_test_51MtV8wSEa4vZ8TNnHcml6zUosKNLK3jAUTCVA1abfY8o82l9fMUV5UJRv7QdihIMLjDNS4i2xsMH8dnCF9FIsJXJ00yGWkv8tY");
 
 function App() {
   const user = useSelector(selectUser);
-  console.log(user);
   const dispatch=useDispatch();
 
   useEffect(()=>{
@@ -38,7 +43,9 @@ function App() {
         <Header/>
         <Routes>
           <Route path="/" element={<Home/>}/>
-          <Route path="/checkout" element={<Checkout/>}/>
+          <Route path="/checkout" element={<Elements stripe={stripePromise}><Checkout/></Elements>}/>
+          <Route path="/success" element={<Elements stripe={stripePromise}><Success/></Elements>}/>
+          <Route path="/orders" element={<Orders/>}/>
           </Routes>
         </>)  }
     </div>
